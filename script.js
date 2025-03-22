@@ -15,15 +15,13 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function getHumanChoice() {
-    let humanChoice = prompt("Enter your choice ('Rock'/'Paper'/'Scissors')");
-    humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1);
-
-    return humanChoice;
+function getHumanChoice(event) {
+    return event.target.textContent;
 }
 
 function playRound(humanChoice, computerChoice) {
     let winner = "No winner";
+    console.log(`Human choice: ${humanChoice}, Computer choice: ${computerChoice}`);
     if(humanChoice == "Rock" && computerChoice == "Paper"){
         winner = "Computer";
         console.log("You lose! Paper beats Rock");
@@ -78,9 +76,14 @@ function playGame() {
     }
 }
 
+let body = document.querySelector("body");
+body.addEventListener("click", function(event){
+    playRound(getHumanChoice(event), getComputerChoice());
+});
+
 // const humanSelection = getHumanChoice();
 // const computerSelection = getHumanChoice();
 
 let humanScore = 0;
 let computerScore = 0;
-playGame();
+// playGame();
