@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Game</title>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="rock" class="btn">Rock</button>
-    <button id="paper" class="btn">Paper</button>
-    <button id="scissors" class="btn">Scissors</button>
-    <div class="results"></div>
+    <h1>Rock Paper Scissors Game</h1>
+    <div id="buttons_container">
+        <button id="rock" class="btn">Rock</button>
+        <button id="paper" class="btn">Paper</button>
+        <button id="scissors" class="btn">Scissors</button>
+    </div>
+
+    <div id="choices_container" class="container"></div>
+    <div id="round_results_container" class="container"></div>
+    <div id="score_container" class="container"></div>
+    <div id="game_result_container" class="container"></div>
+    <button id="restart_button" class="btn">Restart Game</button>
 </body>
 </html>

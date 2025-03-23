@@ -1,0 +1,25 @@
+* {
+    color: white;
+    font-weight: bold;
+    margin: 20px;
+    text-align: center;
+}
+
+body {
+    margin: 80px 0;
+    background-color: bisque;
+}
+
+button {
+    height: 70px;
+    width: 110px;
+    background-color: blueviolet;
+}
+
+.container {
+    color: chocolate;
+}
+
+h1 {
+    color: chocolate;
+}

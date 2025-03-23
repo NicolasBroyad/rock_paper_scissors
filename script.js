@@ -21,69 +21,92 @@ function getHumanChoice(event) {
 
 function playRound(humanChoice, computerChoice) {
     let winner = "No winner";
-    console.log(`Human choice: ${humanChoice}, Computer choice: ${computerChoice}`);
+    choicesContainer.textContent = `Human choice: ${humanChoice}, Computer choice: ${computerChoice}`;
     if(humanChoice == "Rock" && computerChoice == "Paper"){
         winner = "Computer";
-        console.log("You lose! Paper beats Rock");
+        roundResultsContainer.textContent = "You lose! Paper beats Rock. ";
     } else if(humanChoice == "Rock" && computerChoice == "Scissors"){
         winner = "Human";
-        console.log("You won! Rock beats Scissors");
+        roundResultsContainer.textContent = ("You won! Rock beats Scissors. ");
     } else if(humanChoice == "Paper" && computerChoice == "Rock"){
         winner = "Human";
-        console.log("You won! Paper beats Rock");
+        roundResultsContainer.textContent = "You won! Paper beats Rock. ";
     } else if(humanChoice == "Paper" && computerChoice == "Scissors") {
         winner = "Computer";
-        console.log("You lose! Scissors beats Paper");
+        roundResultsContainer.textContent = "You lose! Scissors beats Paper. ";
     } else if(humanChoice == "Scissors" && computerChoice == "Rock") {
         winner = "Computer";
-        console.log("You lose! Rock beats Scissors");
+        roundResultsContainer.textContent = "You lose! Rock beats Scissors. ";
     } else if(humanChoice == "Scissors" && computerChoice == "Paper"){
         winner = "Human";
-        console.log("You won! Scissors beats Paper");
+        roundResultsContainer.textContent = "You won! Scissors beats Paper. ";
     } else {
-        console.log("There was a tie ");
+        roundResultsContainer.textContent = "There was a tie. ";
     }
 
     if(winner != "No winner") {
-        console.log(winner + " wins this round!");
+        roundResultsContainer.textContent += winner + " wins this round!";
     } else {
-        console.log("No winner this round");
+        roundResultsContainer.textContent += "No winner this round";
+    }
+
+    updateScore(winner);
+    if(humanScore >= 5 || computerScore >= 5){
+        matchWinner = getMatchWinner();
+        gameResultContainer.textContent = `${matchWinner} wins the game! Restart to play again.`;
     }
 
     return winner;
 }
 
-function playGame() {
-    let roundWinner;
-    for(i=0; i < 5; i++){
-        console.log("Round " + parseInt(i+1) + " out of 5");
-        roundWinner = playRound(getHumanChoice(),getComputerChoice());
-
-        if(roundWinner == "Human"){
-            humanScore++;
-        } else if(roundWinner == "Computer"){
-            computerScore++;
-        }
-        console.log("Human score: " + humanScore + " // Computer score: " + computerScore);
+function updateScore(roundWinner) {
+    if(roundWinner == "Human"){
+        humanScore += 1;
+    } else if(roundWinner == "Computer"){
+        computerScore += 1;
     }
+    scoreContainer.textContent = "Human score: " + humanScore + " // Computer score: " + computerScore;
+}
 
+function getMatchWinner() {
+    let matchWinner;
     if(humanScore > computerScore){
-        console.log("Human wins the game");
-    } else if(computerScore > humanScore){
-        console.log("Computer wins the game");
+        matchWinner = "Human";
     } else {
-        console.log("The match ended with a tie");
+        matchWinner = "Computer";
     }
+
+    return matchWinner;
+}
+
+function restartGame() {
+    humanScore = 0;
+    computerScore = 0;
+    scoreContainer.textContent = "Human score: " + humanScore + " // Computer score: " + computerScore;
 }
 
 let body = document.querySelector("body");
 body.addEventListener("click", function(event){
-    playRound(getHumanChoice(event), getComputerChoice());
+    if(event.target.textContent === "Restart Game"){
+        restartGame();
+    } else if(humanScore < 5 && computerScore < 5){
+        playRound(getHumanChoice(event), getComputerChoice());
+    } else {
+        alert("The match has ended. Press `Restart Game` to play again.");
+    }
+    
 });
+
+let choicesContainer = document.querySelector("#choices_container");
+let roundResultsContainer = document.querySelector("#round_results_container");
+let gameResultContainer = document.querySelector("#game_result_container");
+let scoreContainer = document.querySelector("#score_container");
+
 
 // const humanSelection = getHumanChoice();
 // const computerSelection = getHumanChoice();
 
 let humanScore = 0;
 let computerScore = 0;
+let round = 0;
 // playGame();
