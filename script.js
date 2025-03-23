@@ -83,6 +83,9 @@ function restartGame() {
     humanScore = 0;
     computerScore = 0;
     scoreContainer.textContent = "Human score: " + humanScore + " // Computer score: " + computerScore;
+    gameResultContainer.textContent = "";
+    roundResultsContainer.textContent = "";
+    choicesContainer.textContent = "";
 }
 
 let body = document.querySelector("body");
